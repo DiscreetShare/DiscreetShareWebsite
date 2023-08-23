@@ -14,16 +14,16 @@ export default function Navbar() {
           <img
             src="https://cdn.mycelium-ai.com/image.png"
             style={{
-              width: "100%", // Image will resize to the screen width
-              height: "auto", // Maintain aspect ratio
+              maxWidth: "50%", // Set a maximum width for the image
+              height: "auto",
               borderRadius: "50%",
               marginLeft: "auto",
-              marginRight: "auto", // Center the image
-              display: "block", // Remove extra space below image
+              marginRight: "auto",
+              display: "block",
             }}
           />
           <Typography variant="h5" component="div" sx={{
-            fontSize: "clamp(1rem, 4vw, 2rem)", // Responsive font size
+            fontSize: "clamp(1rem, 4vw, 2rem)",
             marginLeft: "1%",
             marginRight: "auto",
             fontWeight: "bolder"
