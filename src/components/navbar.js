@@ -9,7 +9,8 @@ import Tab from '@mui/material/Tab';
 export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: "transparent" }}>
+      <AppBar position="static" sx={{ background: "transparent" }}
+elevation={0}>
         <Toolbar>
           <img
             src="https://cdn.mycelium-ai.com/image.png"
