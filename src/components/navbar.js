@@ -8,7 +8,7 @@ import Tab from '@mui/material/Tab';
 
 export default function Navbar() {
   return (
-    <Box sx={{ flexGrow: 1, borderRadius: "0%" }}>
+    <Box sx={{ flexGrow: 0, borderRadius: "0%" }}>
       <AppBar position="static" sx={{ background: "transparent" }}>
         <Toolbar>
           <img
