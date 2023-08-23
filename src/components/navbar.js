@@ -12,7 +12,7 @@ export default function Navbar() {
       <AppBar position="static" sx={{ background: "transparent" }}>
         <Toolbar>
           <img
-            src="https://media.discordapp.net/attachments/854578580381892619/1143945141451755530/shushing-face_1f92b.jpg"
+            src="https://cdn.mycelium-ai.com/image.png"
             width={50}
             height={50}
             style={{
