@@ -23,7 +23,7 @@ const FileUpload = () => {
                 setUploadProgress(percentCompleted);
             },
         }).then((response) => {
-            if (response.data.message === "File uploaded and encrypted") {
+            if (response.data.status === "true") {
                 toast.success('successfully uploaded your file!', {
                     position: "bottom-right",
                     autoClose: 5000,
