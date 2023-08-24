@@ -23,24 +23,49 @@ const FileUpload = () => {
                 setUploadProgress(percentCompleted);
             },
         }).then((response) => {
-            if (response.data.status === "true") {
-                toast.success('successfully uploaded your file!', {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-                setDownloadLink(response.data.downloadLink);
-            } else {
-                setDownloadLink(response.data.downloadLink);
-            }
-            fileInput.value = '';
+            setUploadProgress(percentCompleted);
+    },
+}).then((response) => {
+    if (response.data.status === "size") {
+        toast.error('Your file size is bigger than 5 GB!', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
         });
-    };
+        setDownloadLink(response.data.downloadLink);
+    } else if (response.data.status === "true") {
+        toast.success('Successfully uploaded your file!', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+        setDownloadLink(response.data.downloadLink);
+    } else if (response.data.status === false) {
+        toast.error('An error happened, please try again later', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    } else {
+        setDownloadLink(response.data.downloadLink);
+    }
+    fileInput.value = '';
+});
 
     const handleCopyClick = () => {
         navigator.clipboard.writeText(downloadLink);
