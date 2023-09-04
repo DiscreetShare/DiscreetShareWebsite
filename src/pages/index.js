@@ -15,7 +15,7 @@ const FileUpload = () => {
         const formData = new FormData();
         formData.append('file', file);
         
-        axios.post('https://api.mycelium-ai.com/upload', formData, {
+        axios.post('https://api.discreetshare.com/upload', formData, {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round(
                     (progressEvent.loaded * 100) / progressEvent.total
