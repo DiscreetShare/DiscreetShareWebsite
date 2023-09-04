@@ -122,10 +122,10 @@ const FileUpload = () => {
                 )}
                 {downloadLink && (
                     <Button variant="contained" onClick={handleCopyClick} style={{
-                        width: "20rem",
-                        border: "2px solid #007bff",
+                        width: "15rem",
+                        border: "2px solid #fff",
                         color: "#fff",
-                        background: "#007bff",
+                        background: "transparent",
                         fontWeight: "700"
                     }}>
                     <i className='bx bxs-copy'></i>&nbsp;Copy
