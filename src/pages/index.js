@@ -106,7 +106,7 @@ const FileUpload = () => {
                         <label htmlFor="raised-button-file">
                             <Button variant="contained" component="span" style={{
                                 width: "20rem",
-                                border: "2px solid #007bff",
+                                border: "2px solid #fff",
                                 color: "#fff",
                                 background: "#007bff",
                                 fontWeight: "700"
