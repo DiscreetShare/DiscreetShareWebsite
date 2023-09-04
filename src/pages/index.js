@@ -109,7 +109,7 @@ const FileUpload = () => {
                                 width: "20rem",
                                 border: "2px solid #fff",
                                 color: "#fff",
-                                background: "#007bff",
+                                background: "transparent",
                                 fontWeight: "700"
                             }}>
                             <i className='bx bx-cloud-upload' style={{ color: '#ffffff', fontSize: "25px" }}></i>&nbsp;Upload
