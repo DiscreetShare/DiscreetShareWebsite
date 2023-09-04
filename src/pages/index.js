@@ -146,9 +146,8 @@ const FileUpload = () => {
                     color: "grey",
                 }}>API</a>
             </h2>
-
         </>
     );
-};
+
 
 
