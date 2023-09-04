@@ -4,30 +4,27 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
 const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadLink, setDownloadLink] = useState(null);
-
     const handleFileChange = (event) => {
         const fileInput = event.target;
         const file = fileInput.files[0];
         const formData = new FormData();
         formData.append('file', file);
-
         axios.post('https://api.mycelium-ai.com/upload', formData, {
-            onUploadProgress: (progressEvent) => {
-                const percentCompleted = Math.round(
-                    (progressEvent.loaded * 100) / progressEvent.total
-                );
-                setUploadProgress(percentCompleted);
-            },
-        }).then((response) => {
-            setUploadProgress(percentCompleted);
+    onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setUploadProgress(percentCompleted);
     },
-).then((response) => {
+}).then((response) => {
+    setUploadProgress(percentCompleted);
+  })
+    }.then((response) => {
     if (response.data.status === "size") {
-        toast.error('Your file size is bigger than 3 GB!', {
+        toast.error('Your file size is bigger than 5 GB!', {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -80,7 +77,6 @@ const FileUpload = () => {
             theme: "dark",
         });
     };
-
     return (
         <>
             <h2>Anonymous File Upload</h2>
@@ -102,11 +98,10 @@ const FileUpload = () => {
                             type="file"
                             onChange={handleFileChange}
                         />
-
                         <label htmlFor="raised-button-file">
                             <Button variant="contained" component="span" style={{
                                 width: "20rem",
-                                border: "2px solid #fff",
+                                border: "2px solid #007bff",
                                 color: "#fff",
                                 background: "#007bff",
                                 fontWeight: "700"
@@ -148,6 +143,5 @@ const FileUpload = () => {
             </h2>
         </>
     );
-
-
-
+};
+export default FileUpload;
