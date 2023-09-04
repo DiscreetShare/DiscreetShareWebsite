@@ -25,7 +25,7 @@ const FileUpload = () => {
         })
         .then((response) => {
             if (response.data.status === "size") {
-                toast.error('Your file size is bigger than 5 GB!', {
+                toast.error('Your file size is bigger than 3 GB!', {
                     position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -139,7 +139,7 @@ const FileUpload = () => {
                 marginTop: "50px"
             }}>
                 Upload your files anonymously and free with DiscreetShare.<br />
-                We offer you a 5 GB filesize limit and unlimited bandwidth.<br />
+                We offer you a 3 GB filesize limit and unlimited bandwidth speed.<br />
                 We prevent getting you from being traced back & delete all information that could help with it!<br /><br />
                 Developer? Check out our  <a href="" 
                 className='hovera'
