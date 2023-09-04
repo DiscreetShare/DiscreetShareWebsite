@@ -35,7 +35,6 @@ const FileUpload = () => {
                     progress: undefined,
                     theme: "dark",
                 });
-                setDownloadLink(response.data.downloadLink);
             } else if (response.data.status === "true") {
                 toast.success('Successfully uploaded your file!', {
                     position: "bottom-right",
