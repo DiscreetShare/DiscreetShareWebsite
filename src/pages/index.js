@@ -4,65 +4,70 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
 const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadLink, setDownloadLink] = useState(null);
+
     const handleFileChange = (event) => {
         const fileInput = event.target;
         const file = fileInput.files[0];
         const formData = new FormData();
         formData.append('file', file);
+        
         axios.post('https://api.mycelium-ai.com/upload', formData, {
-    onUploadProgress: (progressEvent) => {
-        const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-        );
-        setUploadProgress(percentCompleted);
-    },
-}).then((response) => {
-    setUploadProgress(percentCompleted);
-  })
-    }.then((response) => {
-    if (response.data.status === "size") {
-        toast.error('Your file size is bigger than 5 GB!', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
+            onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                    (progressEvent.loaded * 100) / progressEvent.total
+                );
+                setUploadProgress(percentCompleted);
+            },
+        })
+        .then((response) => {
+            if (response.data.status === "size") {
+                toast.error('Your file size is bigger than 5 GB!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                setDownloadLink(response.data.downloadLink);
+            } else if (response.data.status === "true") {
+                toast.success('Successfully uploaded your file!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                setDownloadLink(response.data.downloadLink);
+            } else if (response.data.status === false) {
+                toast.error('An error happened, please try again later', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            } else {
+                setDownloadLink(response.data.downloadLink);
+            }
+            fileInput.value = '';
+        })
+        .catch((error) => {
+            console.error("An error occurred:", error);
         });
-        setDownloadLink(response.data.downloadLink);
-    } else if (response.data.status === "true") {
-        toast.success('Successfully uploaded your file!', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-        setDownloadLink(response.data.downloadLink);
-    } else if (response.data.status === false) {
-        toast.error('An error happened, please try again later', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    } else {
-        setDownloadLink(response.data.downloadLink);
-    }
-    fileInput.value = '';
-});
+    };
 
     const handleCopyClick = () => {
         navigator.clipboard.writeText(downloadLink);
@@ -77,6 +82,7 @@ const FileUpload = () => {
             theme: "dark",
         });
     };
+
     return (
         <>
             <h2>Anonymous File Upload</h2>
@@ -144,4 +150,5 @@ const FileUpload = () => {
         </>
     );
 };
+
 export default FileUpload;
