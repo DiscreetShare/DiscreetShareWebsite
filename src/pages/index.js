@@ -25,9 +25,9 @@ const FileUpload = () => {
         }).then((response) => {
             setUploadProgress(percentCompleted);
     },
-}).then((response) => {
+).then((response) => {
     if (response.data.status === "size") {
-        toast.error('Your file size is bigger than 5 GB!', {
+        toast.error('Your file size is bigger than 3 GB!', {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
