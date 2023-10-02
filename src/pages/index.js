@@ -156,19 +156,4 @@ const FileUpload = () => {
                 Upload your files anonymously and free with DiscreetShare.<br />
                 We offer you a 1 GB filesize limit and unlimited bandwidth speed.<br />
                 We prevent getting you from being traced back & delete all information that could help with it!<br /><br />
-                Developer? Check out our  <a href="https://docs.discreetshare.com"
-                className='hovera'
-                style={{
-                    color: "grey",
-                }}>API</a> Wanna report a file? <a href="https://forms.gle/5ZR7ixgjqYa9UawZA"
-                className='hovera'
-                style={{
-                    color: "grey",
-                }}>Submit Abuse</a>
-            </h2>
-            <ToastContainer /> {/* Include the ToastContainer */}
-        </>
-    );
-};
-
-export default FileUpload;
+                Developer? Check out our  <a href="https://docs.dis
