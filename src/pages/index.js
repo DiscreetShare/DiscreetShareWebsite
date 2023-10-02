@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
+import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify'; // Make sure you import 'ToastContainer' too
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
@@ -29,24 +30,54 @@ const FileUpload = () => {
                 });
                 setError(true); // Set error to true
                 fileInput.value = ''; // Clear the file input
-                return; // Stop further processing
-            }
+            } else {
+                // If the file size is within limits, proceed with the upload
+                const formData = new FormData();
+                formData.append('file', file);
 
-            // Simulate a successful upload without actually sending the file
-            setTimeout(() => {
-                toast.success('Successfully uploaded your file!', {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
+                axios.post('https://api.discreetshare.com/upload', formData, {
+                    onUploadProgress: (progressEvent) => {
+                        const percentCompleted = Math.round(
+                            (progressEvent.loaded * 100) / progressEvent.total
+                        );
+                        setUploadProgress(percentCompleted);
+                    },
+                })
+.then((response) => {
+    if (response.data.status === "true") {
+        toast.success('Successfully uploaded your file!', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+        setDownloadLink(response.data.downloadLink);
+    } else if (response.data.status === false) {
+        toast.error('An error happened, please try again later', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+        setError(true); // Set error to true
+    } else {
+        setDownloadLink(response.data.downloadLink);
+    }
+    fileInput.value = ''; // Clear the file input
+})
+                .catch((error) => {
+                    console.error("An error occurred:", error);
+                    setError(true); // Set error to true
                 });
-                setDownloadLink('https://example.com/download-link'); // Set a dummy download link
-                fileInput.value = ''; // Clear the file input
-            }, 2000); // Simulate a delay for demonstration
+            }
         }
     };
 
