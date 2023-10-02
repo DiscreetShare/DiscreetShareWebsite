@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadLink, setDownloadLink] = useState(null);
+    const [downloadLinks, setDownloadLinks] = useState([]);
     const [error, setError] = useState(false);
     const handleFileChange = (event) => {
         const fileInput = event.target;
