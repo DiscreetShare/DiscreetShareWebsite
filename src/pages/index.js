@@ -168,7 +168,11 @@ const FileUpload = () => {
                 className='hovera'
                 style={{
                     color: "grey",
-                }}>Submit Abuse</a>
+                }}>Submit Abuse</a> Join us on <a href="https://discord.gg/xDd3V8JHhQ"
+                className='hovera'
+                style={{
+                    color: "grey",
+                }}>discord</a>. 
             </h2>
             <ToastContainer /> {/* Include the ToastContainer */}
         </>
