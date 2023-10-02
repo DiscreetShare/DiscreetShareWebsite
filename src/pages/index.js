@@ -62,7 +62,8 @@ const FileUpload = () => {
                 });
                 setError(true); // Set error to true
             } else {
-                setDownloadLink(response.data.downloadLink);
+                setDownloadLinks((prevLinks) => [...prevLinks, response.data.downloadLink]);
+
             }
             fileInput.value = '';
         })
