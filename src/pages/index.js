@@ -10,7 +10,7 @@ const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadLink, setDownloadLink] = useState(null);
     const [error, setError] = useState(false);
-
+const [uploading, setUploading] = useState(false);
     const handleFileChange = (event) => {
         const fileInput = event.target;
         const file = fileInput.files[0];
@@ -32,6 +32,7 @@ const FileUpload = () => {
                 fileInput.value = ''; // Clear the file input
             } else {
                 // If the file size is within limits, proceed with the upload
+            setUploading(true);
                 const formData = new FormData();
                 formData.append('file', file);
 
@@ -88,6 +89,9 @@ const FileUpload = () => {
                     setError(true); // Set error to true
                 });
             }
+                   .finally(() => {
+                    setUploading(false); // Set uploading state to false when done
+                });
         }
     };
 
@@ -119,7 +123,7 @@ const FileUpload = () => {
                     marginTop: "3%",
                 }}
             >
-                {!downloadLink && !error && (
+                {!downloadLink && !error && !uploading && (
                     <>
                         <input
                             style={{ display: 'none' }}
@@ -165,6 +169,19 @@ const FileUpload = () => {
                         <i className='bx bx-error'></i>&nbsp;ERROR!
                     </Button>
                 )}
+
+                {/* New button for uploading */}
+                {uploading && (
+                    <Button variant="contained" style={{
+                        width: "15rem",
+                        border: "2px solid #fff",
+                        color: "#fff",
+                        background: "transparent",
+                        fontWeight: "700"
+                    }} disabled>
+                        Uploading...
+                    </Button>
+                )}
             </Box>
             <h2 style={{
                 fontSize: "20px !important",
@@ -193,5 +210,7 @@ const FileUpload = () => {
         </>
     );
 };
+
+export default FileUpload;
 
 export default FileUpload;
