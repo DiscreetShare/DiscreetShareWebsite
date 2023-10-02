@@ -69,19 +69,20 @@ const FileUpload = () => {
             setError(true); // Set error to true
         });
     };
-    const handleCopyClick = () => {
-        navigator.clipboard.writeText(downloadLink);
-        toast.success('Download link copied!', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    };
+const handleCopyClick = () => {
+    const linksToCopy = downloadLinks.join('\n'); // Separate links with newline character
+    navigator.clipboard.writeText(linksToCopy);
+    toast.success('Download links copied!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
+};
     return (
         <>
             <h2>Anonymous File Upload</h2>
@@ -119,17 +120,17 @@ const FileUpload = () => {
                         )}
                     </>
                 )}
-                {downloadLink && (
-                    <Button variant="contained" onClick={handleCopyClick} style={{
-                        width: "15rem",
-                        border: "2px solid #fff",
-                        color: "#fff",
-                        background: "transparent",
-                        fontWeight: "700"
-                    }}>
-                    <i className='bx bxs-copy'></i>&nbsp;Copy
-                    </Button>
-                )}
+{downloadLinks.length > 0 && (
+    <Button variant="contained" onClick={handleCopyClick} style={{
+        width: "15rem",
+        border: "2px solid #fff",
+        color: "#fff",
+        background: "transparent",
+        fontWeight: "700"
+    }}>
+    <i className='bx bxs-copy'></i>&nbsp;Copy
+    </Button>
+)}
                 {error && (
                     <Button variant="contained" style={{
                         width: "15rem",
