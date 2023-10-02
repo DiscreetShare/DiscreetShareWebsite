@@ -47,7 +47,8 @@ const FileUpload = () => {
                     progress: undefined,
                     theme: "dark",
                 });
-                setDownloadLink(response.data.downloadLink);
+                setDownloadLinks((prevLinks) => [...prevLinks, response.data.downloadLink]);
+
             } else if (response.data.status === false) {
                 toast.error('An error happened, please try again later', { // Use 'toast.error'
                     position: "bottom-right",
@@ -121,7 +122,7 @@ const handleCopyClick = () => {
                         )}
                     </>
                 )}
-{downloadLinks.length > 0 && (
+{downloadLinks.length > 0 ? (
     <Button variant="contained" onClick={handleCopyClick} style={{
         width: "15rem",
         border: "2px solid #fff",
@@ -131,7 +132,7 @@ const handleCopyClick = () => {
     }}>
     <i className='bx bxs-copy'></i>&nbsp;Copy
     </Button>
-)}
+) : null}
                 {error && (
                     <Button variant="contained" style={{
                         width: "15rem",
