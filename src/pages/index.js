@@ -3,7 +3,8 @@ import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify'; // Make sure you import 'ToastContainer' too
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
 const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
@@ -26,7 +27,7 @@ const FileUpload = () => {
         })
         .then((response) => {
             if (response.data.status === "size") {
-                toast.error('Your file size is bigger than 1 GB!', {
+                toast.error('Your file size is bigger than 1 GB!', { // Use 'toast.error'
                     position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -50,7 +51,7 @@ const FileUpload = () => {
                 });
                 setDownloadLink(response.data.downloadLink);
             } else if (response.data.status === false) {
-                toast.error('An error happened, please try again later', {
+                toast.error('An error happened, please try again later', { // Use 'toast.error'
                     position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -165,6 +166,7 @@ const FileUpload = () => {
                     color: "grey",
                 }}>Submit Abuse</a>
             </h2>
+            <ToastContainer /> {/* Include the ToastContainer */}
         </>
     );
 };
