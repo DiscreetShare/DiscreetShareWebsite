@@ -5,18 +5,15 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify'; // Make sure you import 'ToastContainer' too
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
-
 const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadLink, setDownloadLink] = useState(null);
     const [error, setError] = useState(false);
-
     const handleFileChange = (event) => {
         const fileInput = event.target;
         const file = fileInput.files[0];
         const formData = new FormData();
         formData.append('file', file);
-
         axios.post('https://api.discreetshare.com/upload', formData, {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round(
@@ -72,7 +69,6 @@ const FileUpload = () => {
             setError(true); // Set error to true
         });
     };
-
     const handleCopyClick = () => {
         navigator.clipboard.writeText(downloadLink);
         toast.success('Download link copied!', {
@@ -86,7 +82,6 @@ const FileUpload = () => {
             theme: "dark",
         });
     };
-
     return (
         <>
             <h2>Anonymous File Upload</h2>
@@ -170,5 +165,4 @@ const FileUpload = () => {
         </>
     );
 };
-
 export default FileUpload;
