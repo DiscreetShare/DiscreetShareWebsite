@@ -8,13 +8,14 @@ import { toast } from 'react-toastify';
 const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadLink, setDownloadLink] = useState(null);
+    const [error, setError] = useState(false);
 
     const handleFileChange = (event) => {
         const fileInput = event.target;
         const file = fileInput.files[0];
         const formData = new FormData();
         formData.append('file', file);
-        
+
         axios.post('https://api.discreetshare.com/upload', formData, {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round(
@@ -35,6 +36,7 @@ const FileUpload = () => {
                     progress: undefined,
                     theme: "dark",
                 });
+                setError(true); // Set error to true
             } else if (response.data.status === "true") {
                 toast.success('Successfully uploaded your file!', {
                     position: "bottom-right",
@@ -58,6 +60,7 @@ const FileUpload = () => {
                     progress: undefined,
                     theme: "dark",
                 });
+                setError(true); // Set error to true
             } else {
                 setDownloadLink(response.data.downloadLink);
             }
@@ -65,6 +68,7 @@ const FileUpload = () => {
         })
         .catch((error) => {
             console.error("An error occurred:", error);
+            setError(true); // Set error to true
         });
     };
 
@@ -94,7 +98,7 @@ const FileUpload = () => {
                     marginTop: "3%",
                 }}
             >
-                {!downloadLink && (
+                {!downloadLink && !error && (
                     <>
                         <input
                             style={{ display: 'none' }}
@@ -130,6 +134,17 @@ const FileUpload = () => {
                     <i className='bx bxs-copy'></i>&nbsp;Copy
                     </Button>
                 )}
+                {error && (
+                    <Button variant="contained" style={{
+                        width: "15rem",
+                        border: "2px solid red", // Red border for error
+                        color: "red", // Red text color for error
+                        background: "transparent",
+                        fontWeight: "700"
+                    }}>
+                    ERROR!
+                    </Button>
+                )}
             </Box>
             <h2 style={{
                 fontSize: "20px !important",
@@ -140,13 +155,13 @@ const FileUpload = () => {
                 Upload your files anonymously and free with DiscreetShare.<br />
                 We offer you a 1 GB filesize limit and unlimited bandwidth speed.<br />
                 We prevent getting you from being traced back & delete all information that could help with it!<br /><br />
-                Developer? Check out our  <a href="https://docs.discreetshare.com" 
+                Developer? Check out our  <a href="https://docs.discreetshare.com"
                 className='hovera'
-                style={{ 
+                style={{
                     color: "grey",
-                }}>API</a> Wanna report a file? <a href="https://forms.gle/5ZR7ixgjqYa9UawZA" 
+                }}>API</a> Wanna report a file? <a href="https://forms.gle/5ZR7ixgjqYa9UawZA"
                 className='hovera'
-                style={{ 
+                style={{
                     color: "grey",
                 }}>Submit Abuse</a>
             </h2>
