@@ -143,7 +143,7 @@ const FileUpload = () => {
                         background: "transparent",
                         fontWeight: "700"
                     }}>
-                    ERROR!
+                    <i className='bx bx-error'></i>&nbsp;ERROR!
                     </Button>
                 )}
             </Box>
