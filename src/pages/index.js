@@ -74,22 +74,23 @@ const [uploading, setUploading] = useState(false);
     }
     fileInput.value = ''; // Clear the file input
 })
-                .catch((error) => {
-                    console.error("An error occurred:", error);
-                            toast.error('An error happened, please try again later', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-                    setError(true); // Set error to true
-                }); .finally(() => {
-                    setUploading(false); // Set uploading state to false when done
-                });
+.catch((error) => {
+    console.error("An error occurred:", error);
+    toast.error('An error happened, please try again later', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
+    setError(true); // Set error to true
+})
+.finally(() => {
+    setUploading(false); // Set uploading state to false when done
+});
         }
     };
 
