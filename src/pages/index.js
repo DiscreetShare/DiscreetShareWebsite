@@ -177,7 +177,7 @@ const FileUpload = () => {
                         background: "transparent",
                         fontWeight: "700"
                     }} disabled>
-                        Uploading...
+                        <i className='bx bx-loader-circle'></i>&nbsp;Uploading...
                     </Button>
                 )}
             </Box>
