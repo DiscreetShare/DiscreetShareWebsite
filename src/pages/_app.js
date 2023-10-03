@@ -9,12 +9,12 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>DiscreetShare</title>
-        <meta name="description" content="Welcome to DiscreetShare, your trusted platform for anonymous and free file uploads. With our service, you can confidently share your files while ensuring your privacy remains intact. We've taken steps to prevent any tracebacks and diligently delete all potentially identifying information, giving you the peace of mind you deserve. Experience confidential file sharing today with DiscreetShare!" />
+        <meta name="description" content="Welcome to DiscreetShare, your trusted platform for anonymous and free file uploads. With our service, you can confidently share your files while ensuring your privacy remains intact. We've taken steps to prevent any tracebacks and diligently delete all potentially identifying information, giving you the peace of mind you deserve." />
         <meta name="theme-color" content="#fff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="https://cdn.mycelium-ai.com/image.png" />
         <meta name="twitter:title" content="DiscreetShare" />
-        <meta name="twitter:description" content="Welcome to DiscreetShare, your trusted platform for anonymous and free file uploads. With our service, you can confidently share your files while ensuring your privacy remains intact. We've taken steps to prevent any tracebacks and diligently delete all potentially identifying information, giving you the peace of mind you deserve. Experience confidential file sharing today with DiscreetShare!" />
+        <meta name="twitter:description" content="Welcome to DiscreetShare, your trusted platform for anonymous and free file uploads. With our service, you can confidently share your files while ensuring your privacy remains intact. We've taken steps to prevent any tracebacks and diligently delete all potentially identifying information, giving you the peace of mind you deserve." />
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
       </Head>
       <Navbar />
