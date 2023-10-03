@@ -209,7 +209,4 @@ const [uploading, setUploading] = useState(false);
         </>
     );
 };
-
-export default FileUpload;
-
 export default FileUpload;
