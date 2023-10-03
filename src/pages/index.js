@@ -88,8 +88,7 @@ const [uploading, setUploading] = useState(false);
         });
                     setError(true); // Set error to true
                 });
-            }
-                   .finally(() => {
+            }.finally(() => {
                     setUploading(false); // Set uploading state to false when done
                 });
         }
