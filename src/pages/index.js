@@ -69,6 +69,18 @@ const FileUpload = () => {
                             theme: "dark",
                         });
                         setError(true);
+                    } else if (response.data.status === hb-410) {
+                        toast.error('This file is banned from our service.', {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                        });
+                        setError(true);
                     } else {
                         setDownloadLink(response.data.downloadLink);
                     }
