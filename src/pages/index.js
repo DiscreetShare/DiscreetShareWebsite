@@ -3,20 +3,20 @@ import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify'; // Make sure you import 'ToastContainer' too
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [downloadLink, setDownloadLink] = useState(null);
     const [error, setError] = useState(false);
-const [uploading, setUploading] = useState(false);
-    const handleFileChange = (event) => {
+    const [uploading, setUploading] = useState(false);
+
+    const handleFileChange = async (event) => {
         const fileInput = event.target;
         const file = fileInput.files[0];
 
         if (file) {
-            // Check if the file size is greater than 1 GB (1 GB = 1024 * 1024 * 1024 bytes)
             if (file.size > 1024 * 1024 * 1024) {
                 toast.error('Your file size is bigger than 1 GB!', {
                     position: "bottom-right",
@@ -28,69 +28,69 @@ const [uploading, setUploading] = useState(false);
                     progress: undefined,
                     theme: "dark",
                 });
-                setError(true); // Set error to true
-                fileInput.value = ''; // Clear the file input
+                setError(true);
+                fileInput.value = '';
             } else {
-                // If the file size is within limits, proceed with the upload
-            setUploading(true);
+                setUploading(true);
                 const formData = new FormData();
                 formData.append('file', file);
 
-                axios.post('https://api.discreetshare.com/upload', formData, {
-                    onUploadProgress: (progressEvent) => {
-                        const percentCompleted = Math.round(
-                            (progressEvent.loaded * 100) / progressEvent.total
-                        );
-                        setUploadProgress(percentCompleted);
-                    },
-                })
-.then((response) => {
-    if (response.data.status === "true") {
-        toast.success('Successfully uploaded your file!', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-        setDownloadLink(response.data.downloadLink);
-    } else if (response.data.status === false) {
-        toast.error('An error happened, please try again later', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-        setError(true); // Set error to true
-    } else {
-        setDownloadLink(response.data.downloadLink);
-    }
-    fileInput.value = ''; // Clear the file input
-})
-.catch((error) => {
-    console.error("An error occurred:", error);
-    toast.error('An error happened, please try again later', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-    });
-    setError(true); // Set error to true
-})
-.finally(() => {
-    setUploading(false); // Set uploading state to false when done
-});
+                try {
+                    const response = await axios.post('https://api.discreetshare.com/upload', formData, {
+                        onUploadProgress: (progressEvent) => {
+                            const percentCompleted = Math.round(
+                                (progressEvent.loaded * 100) / progressEvent.total
+                            );
+                            setUploadProgress(percentCompleted);
+                        },
+                    });
+
+                    if (response.data.status === "true") {
+                        toast.success('Successfully uploaded your file!', {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                        });
+                        setDownloadLink(response.data.downloadLink);
+                    } else if (response.data.status === false) {
+                        toast.error('An error happened, please try again later', {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                        });
+                        setError(true);
+                    } else {
+                        setDownloadLink(response.data.downloadLink);
+                    }
+
+                    fileInput.value = '';
+                } catch (error) {
+                    console.error("An error occurred:", error);
+                    toast.error('An error happened, please try again later', {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                    setError(true);
+                } finally {
+                    setUploading(false);
+                }
+            }
         }
     };
 
@@ -160,8 +160,8 @@ const [uploading, setUploading] = useState(false);
                 {error && (
                     <Button variant="contained" style={{
                         width: "15rem",
-                        border: "2px solid red", // Red border for error
-                        color: "red", // Red text color for error
+                        border: "2px solid red",
+                        color: "red",
                         background: "transparent",
                         fontWeight: "700"
                     }}>
@@ -169,7 +169,6 @@ const [uploading, setUploading] = useState(false);
                     </Button>
                 )}
 
-                {/* New button for uploading */}
                 {uploading && (
                     <Button variant="contained" style={{
                         width: "15rem",
@@ -205,8 +204,9 @@ const [uploading, setUploading] = useState(false);
                                 color: "grey",
                             }}>discord</a>.
             </h2>
-            <ToastContainer /> {/* Include the ToastContainer */}
+            <ToastContainer />
         </>
     );
 };
+
 export default FileUpload;
