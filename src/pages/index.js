@@ -210,7 +210,7 @@ const FileUpload = () => {
                         className='hovera'
                         style={{
                             color: "grey",
-                        }}>Submit Abuse</a> Join us on <a href="https://discord.gg/xDd3V8JHhQ"
+                        }}>Submit Abuse</a> Join us on <a href="https://discord.gg/fB2CG4V5CX"
                             className='hovera'
                             style={{
                                 color: "grey",
