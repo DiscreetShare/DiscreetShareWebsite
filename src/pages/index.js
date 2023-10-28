@@ -36,7 +36,7 @@ const FileUpload = () => {
                 formData.append('file', file);
 
                 try {
-                    const response = await axios.post('https://api.discreetshare.com/upload', formData, {
+                    const response = await axios.post('https://api.discreetshare.com:6969/upload', formData, {
                         onUploadProgress: (progressEvent) => {
                             const percentCompleted = Math.round(
                                 (progressEvent.loaded * 100) / progressEvent.total
