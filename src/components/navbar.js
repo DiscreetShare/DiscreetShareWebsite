@@ -12,7 +12,7 @@ export default function Navbar() {
       <AppBar position="static" sx={{ background: "transparent" }} elevation={0}>
         <Toolbar>
           <img
-            src="https://cdn.mycelium-ai.com/image.png"
+            src="https://pub-44f67738e4814e9abdbb417e1f707619.r2.dev/image.png"
             width={50}
             height={50}
             style={{
