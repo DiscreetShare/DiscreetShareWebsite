@@ -12,7 +12,7 @@ export default function Navbar() {
       <AppBar position="static" sx={{ background: "transparent" }} elevation={0}>
         <Toolbar>
           <img
-            src="https://pub-44f67738e4814e9abdbb417e1f707619.r2.dev/image.png"
+            src="https://api.discreetshare.com/cdn/65c55e0952319df41011cd60"
             width={50}
             height={50}
             style={{
