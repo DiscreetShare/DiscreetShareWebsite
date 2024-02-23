@@ -12,9 +12,23 @@ const FileUpload = () => {
     const [error, setError] = useState(false);
     const [uploading, setUploading] = useState(false);
 
+    // Consolidated toast notification handler
+    const showToast = (message, isError = false) => {
+        toast(message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            type: isError ? toast.TYPE.ERROR : toast.TYPE.SUCCESS,
+        });
+    };
+
     const handleFileChange = async (event) => {
-        const fileInput = event.target;
-        const file = fileInput.files[0];
+        const file = event.target.files[0];
 
         if (file) {
             setUploading(true);
@@ -31,62 +45,22 @@ const FileUpload = () => {
                     },
                 });
 
-                if (response.data.status === "true") {
-                    toast.success('Successfully uploaded your file!', {
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
-                    setDownloadLink(response.data.downloadLink);
-                } else if (response.data.status === false) {
-                    toast.error('An error happened, please try again later', {
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
-                    setError(true);
-                } else if (response.data.status === hb-410) {
-                    toast.error('This file is banned from our service.', {
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
-                    setError(true);
-                } else {
-                    setDownloadLink(response.data.downloadLink);
-                }
+                const { status, downloadLink } = response.data;
 
-                fileInput.value = '';
+                if (status === "true") {
+                    showToast('Successfully uploaded your file!');
+                    setDownloadLink(downloadLink);
+                } else {
+                    showToast('An error happened, please try again later', true);
+                    setError(true);
+                }
             } catch (error) {
                 console.error("An error occurred:", error);
-                toast.error('An error happened, please try again later', {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
+                showToast('An error happened, please try again later', true);
                 setError(true);
             } finally {
                 setUploading(false);
+                event.target.value = ''; // Clear the input after upload
             }
         }
     };
@@ -94,17 +68,17 @@ const FileUpload = () => {
     const handleCopyClick = () => {
         if (downloadLink) {
             navigator.clipboard.writeText(downloadLink);
-            toast.success('Download link copied!', {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            showToast('Download link copied!');
         }
+    };
+
+    // Common button style to avoid repetition
+    const buttonStyle = {
+        width: "15rem",
+        border: "2px solid #fff",
+        color: "#fff",
+        background: "transparent",
+        fontWeight: "700",
     };
 
     return (
@@ -115,9 +89,7 @@ const FileUpload = () => {
                 justifyContent="center"
                 alignItems="center"
                 minHeight="10vh"
-                sx={{
-                    marginTop: "3%",
-                }}
+                sx={{ marginTop: "3%" }}
             >
                 {!downloadLink && !error && !uploading && (
                     <>
@@ -128,52 +100,25 @@ const FileUpload = () => {
                             onChange={handleFileChange}
                         />
                         <label htmlFor="raised-button-file">
-                            <Button variant="contained" component="span" style={{
-                                width: "15rem",
-                                border: "2px solid #fff",
-                                color: "#fff",
-                                background: "transparent",
-                                fontWeight: "700"
-                            }}>
+                            <Button variant="contained" component="span" style={buttonStyle}>
                                 <i className='bx bx-cloud-upload' style={{ color: '#ffffff', fontSize: "25px" }}></i>&nbsp;Upload
                             </Button>
                         </label>
-                        {uploadProgress > 0 && (
-                            <LinearProgress variant="determinate" value={uploadProgress} />
-                        )}
+                        {uploadProgress > 0 && <LinearProgress variant="determinate" value={uploadProgress} />}
                     </>
                 )}
                 {downloadLink && (
-                    <Button variant="contained" onClick={handleCopyClick} style={{
-                        width: "15rem",
-                        border: "2px solid #fff",
-                        color: "#fff",
-                        background: "transparent",
-                        fontWeight: "700"
-                    }}>
+                    <Button variant="contained" onClick={handleCopyClick} style={buttonStyle}>
                         <i className='bx bxs-copy'></i>&nbsp;Copy
                     </Button>
                 )}
                 {error && (
-                    <Button variant="contained" style={{
-                        width: "15rem",
-                        border: "2px solid red",
-                        color: "red",
-                        background: "transparent",
-                        fontWeight: "700"
-                    }}>
+                    <Button variant="contained" style={{ ...buttonStyle, border: "2px solid red", color: "red" }}>
                         <i className='bx bx-error'></i>&nbsp;ERROR!
                     </Button>
                 )}
-
                 {uploading && (
-                    <Button variant="contained" style={{
-                        width: "15rem",
-                        border: "2px solid #fff",
-                        color: "#fff",
-                        background: "transparent",
-                        fontWeight: "700"
-                    }} disabled>
+                    <Button variant="contained" style={buttonStyle} disabled>
                         <i className='bx bx-loader-circle'></i>&nbsp;Uploading...
                     </Button>
                 )}
