@@ -17,77 +17,33 @@ const FileUpload = () => {
         const file = fileInput.files[0];
 
         if (file) {
-            if (file.size > 1024 * 1024 * 1024) {
-                toast.error('Your file size is bigger than 1 GB!', {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
+            setUploading(true);
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await axios.post('https://api.discreetshare.com/upload', formData, {
+                    onUploadProgress: (progressEvent) => {
+                        const percentCompleted = Math.round(
+                            (progressEvent.loaded * 100) / progressEvent.total
+                        );
+                        setUploadProgress(percentCompleted);
+                    },
                 });
-                setError(true);
-                fileInput.value = '';
-            } else {
-                setUploading(true);
-                const formData = new FormData();
-                formData.append('file', file);
 
-                try {
-                    const response = await axios.post('https://api.discreetshare.com/upload', formData, {
-                        onUploadProgress: (progressEvent) => {
-                            const percentCompleted = Math.round(
-                                (progressEvent.loaded * 100) / progressEvent.total
-                            );
-                            setUploadProgress(percentCompleted);
-                        },
+                if (response.data.status === "true") {
+                    toast.success('Successfully uploaded your file!', {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
                     });
-
-                    if (response.data.status === "true") {
-                        toast.success('Successfully uploaded your file!', {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "dark",
-                        });
-                        setDownloadLink(response.data.downloadLink);
-                    } else if (response.data.status === false) {
-                        toast.error('An error happened, please try again later', {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "dark",
-                        });
-                        setError(true);
-                    } else if (response.data.status === hb-410) {
-                        toast.error('This file is banned from our service.', {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "dark",
-                        });
-                        setError(true);
-                    } else {
-                        setDownloadLink(response.data.downloadLink);
-                    }
-
-                    fileInput.value = '';
-                } catch (error) {
-                    console.error("An error occurred:", error);
+                    setDownloadLink(response.data.downloadLink);
+                } else if (response.data.status === false) {
                     toast.error('An error happened, please try again later', {
                         position: "bottom-right",
                         autoClose: 5000,
@@ -99,9 +55,38 @@ const FileUpload = () => {
                         theme: "dark",
                     });
                     setError(true);
-                } finally {
-                    setUploading(false);
+                } else if (response.data.status === hb-410) {
+                    toast.error('This file is banned from our service.', {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                    setError(true);
+                } else {
+                    setDownloadLink(response.data.downloadLink);
                 }
+
+                fileInput.value = '';
+            } catch (error) {
+                console.error("An error occurred:", error);
+                toast.error('An error happened, please try again later', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                setError(true);
+            } finally {
+                setUploading(false);
             }
         }
     };
@@ -194,13 +179,13 @@ const FileUpload = () => {
                 )}
             </Box>
             <h2 style={{
-                fontSize: "20px !important",
+                fontSize: "1.25rem",
                 lineHeight: "1.2",
                 textAlign: "center",
                 marginTop: "50px"
             }}>
                 Upload your files anonymously and free with DiscreetShare.<br />
-                We offer you a 1 GB filesize limit and unlimited bandwidth speed.<br />
+                We offer you unlimited filesize limit and unlimited bandwidth speed.<br />
                 We prevent getting you from being traced back & delete all information that could help with it!<br /><br />
                 Developer? Check out our  <a href="https://docs.discreetshare.com"
                     className='hovera'
