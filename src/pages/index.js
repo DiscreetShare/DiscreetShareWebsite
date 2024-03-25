@@ -60,7 +60,7 @@ const FileUpload = () => {
                 }
             } catch (error) {
                 console.error("An error occurred:", error);
-                if (error.response && error.response.status === 403 && error.response.data.message === "Sorry the uploads are disabled for now please wait till the maintenance ends") {
+                if (error.response && error.response.status === 403 && error.response.data.status === "ud-403") {
                     showToast("Sorry the uploads are disabled for now please wait till the maintenance ends", true);
                 } else {
                     showToast('An error happened, please try again later', true);
