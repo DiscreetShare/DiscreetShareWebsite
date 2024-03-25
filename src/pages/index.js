@@ -50,6 +50,10 @@ const FileUpload = () => {
                 if (status === "true") {
                     showToast('Successfully uploaded your file!');
                     setDownloadLink(downloadLink);
+                    if (status == "ud-403) {
+                        showToast('Sorry the uploads are disabled for now please wait till the maintenance ends', true);
+                    setError(true);
+                        }
                 } else {
                     showToast('An error happened, please try again later', true);
                     setError(true);
