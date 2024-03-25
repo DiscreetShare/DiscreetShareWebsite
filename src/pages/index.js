@@ -152,7 +152,11 @@ const FileUpload = () => {
                             className='hovera'
                             style={{
                                 color: "grey",
-                            }}>discord</a>.
+                            }}>discord</a> See our <a href="https://discord.gg/CVxaB3rPuJ"
+                            className='hovera'
+                            style={{
+                                color: "grey",
+                            }}>status page</a>.
             </h2>
             <ToastContainer />
         </>
