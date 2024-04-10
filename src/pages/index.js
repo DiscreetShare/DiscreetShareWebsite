@@ -94,7 +94,7 @@ const FileUpload = () => {
     return (
         <>
         
-</head>
+
             <h2>Anonymous File Upload</h2>
             <Box
                 display="flex"
