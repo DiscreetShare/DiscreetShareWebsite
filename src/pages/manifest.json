@@ -1,0 +1,15 @@
+{
+  "name": "DiscreetShare",
+  "short_name": "DS",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://cdn.discreetshare.com/65c55e0952319df41011cd60",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
