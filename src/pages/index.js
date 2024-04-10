@@ -101,6 +101,8 @@ if ('serviceWorker' in navigator) {
 
     return (
         <>
+        <head><link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+</head>
             <h2>Anonymous File Upload</h2>
             <Box
                 display="flex"
