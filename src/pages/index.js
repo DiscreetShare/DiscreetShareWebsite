@@ -51,7 +51,7 @@ const FileUpload = () => {
                     showToast('Successfully uploaded your file!');
                     setDownloadLink(downloadLink);
                     if (status == "ud-403") {
-                        showToast('Sorry the uploads are disabled for now please wait till the maintenance ends', true);
+                        showToast('Sorry, uploads are disabled for now. Please wait until the maintenance ends', true);
                     setError(true);
                         }
                 } else {
@@ -61,7 +61,7 @@ const FileUpload = () => {
             } catch (error) {
                 console.error("An error occurred:", error);
                 if (error.response && error.response.status === 403 && error.response.data.status === "ud-403") {
-                    showToast("Sorry the uploads are disabled for now please wait till the maintenance ends", true);
+                    showToast("Sorry, uploads are disabled for now. Please wait until the maintenance ends", true);
                 } else {
                     showToast('An error happened, please try again later', true);
                 }
@@ -143,8 +143,8 @@ const FileUpload = () => {
             }}>
                 Upload your files anonymously and free with DiscreetShare.<br />
                 We offer you unlimited filesize limit and unlimited bandwidth speed.<br />
-                We prevent getting you from being traced back & delete all information that could help with it!<br /><br />
-                Developer? Check out our  <a href="https://docs.discreetshare.com"
+                We remove all information that could potentially trace back to you!<br /><br />
+                Developer? Check out our <a href="https://docs.discreetshare.com"
                     className='hovera'
                     style={{
                         color: "grey",
