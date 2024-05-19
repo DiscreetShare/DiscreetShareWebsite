@@ -93,7 +93,8 @@ const FileUpload = () => {
 
     return (
         <>
-        
+        <head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2516216899718507"
+     crossorigin="anonymous"></script></head>
 
             <h2>Anonymous File Upload</h2>
             <Box
