@@ -162,7 +162,7 @@ const FileUpload = () => {
                             style={{
                                 color: "grey",
                             }}>status page
-                                </a>Check out what we keep track of on this <a href="https://tracking.discreetshare.com"
+                                </a><br>Check out what we keep track of on this <a href="https://tracking.discreetshare.com"
                             className='hovera'
                             style={{
                                 color: "grey",
