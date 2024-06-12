@@ -149,7 +149,7 @@ const FileUpload = () => {
                     className='hovera'
                     style={{
                         color: "grey",
-                    }}>API</a> Wanna report a file? <a href="mailto:abuse@discreetshare.com?subject=Abuse%20Report">
+                    }}>API</a> Wanna report a file? <a href="mailto:abuse@discreetshare.com?subject=Abuse%20Report"
                         className='hovera'
                         style={{
                             color: "grey",
