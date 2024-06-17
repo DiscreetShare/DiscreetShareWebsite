@@ -166,7 +166,7 @@ const FileUpload = () => {
                             className='hovera'
                             style={{
                                 color: "grey",
-                            }}>website</a><br></br>Check out our<a href="https://tracking.discreetshare.com"
+                            }}>website</a><br></br>Check out our <a href="https://tracking.discreetshare.com"
                             className='hovera'
                             style={{
                                 color: "grey",
