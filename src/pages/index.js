@@ -47,7 +47,7 @@ const FileUpload = () => {
 
                 const { status, downloadLink } = response.data;
 
-                if (status === "true") {
+                if (status === "su-201") {
                     showToast('Successfully uploaded your file!');
                     setDownloadLink(downloadLink);
                     if (status == "ud-403") {
