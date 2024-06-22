@@ -48,8 +48,12 @@ const FileUpload = () => {
                 const { status, downloadLink } = response.data;
 
                 if (status === "su-201") {
+                    showToast('File already exist!');
+                    setDownloadLink(downloadLink);
+                      if (status === "fe-200") {
                     showToast('Successfully uploaded your file!');
                     setDownloadLink(downloadLink);
+                      }
                     if (status == "ud-403") {
                         showToast('Sorry, uploads are disabled for now. Please wait until the maintenance ends', true);
                     setError(true);
