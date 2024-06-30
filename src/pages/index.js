@@ -57,7 +57,7 @@ if (status === "su-201") {
     setError(true);
 } else if (status === "fb-410") {
     showToast('File is banned from the service due to non-compliance with legal regulations.');
-    setDownloadLink(downloadLink);
+    setError(true);
 } else {
     showToast('An error happened, please try again later', true);
     setError(true);
