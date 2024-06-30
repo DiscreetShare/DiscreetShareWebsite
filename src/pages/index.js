@@ -167,11 +167,7 @@ if (status === "su-201") {
                             style={{
                                 color: "grey",
                             }}>status page
-                                </a><br></br>Check out what we keep track of on this <a href="https://tracking.discreetshare.com"
-                            className='hovera'
-                            style={{
-                                color: "grey",
-                            }}>website</a><br></br>Check out our <a href="https://tracking.discreetshare.com"
+                                </a><br></br>Check out our <a href="https://blog.discreetshare.com"
                             className='hovera'
                             style={{
                                 color: "grey",
