@@ -55,6 +55,9 @@ if (status === "su-201") {
 } else if (status === "ud-403") {
     showToast('Sorry, uploads are disabled for now. Please wait until the maintenance ends', true);
     setError(true);
+} else if (status === "fb-410") {
+    showToast('File is banned from the service due to non-compliance with legal regulations.');
+    setDownloadLink(downloadLink);
 } else {
     showToast('An error happened, please try again later', true);
     setError(true);
